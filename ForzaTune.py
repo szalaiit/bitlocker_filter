@@ -1,17 +1,31 @@
 from colorama import Fore, Back, Style
 
-print("Plesase Choose a Mode:")
-print("1. Asphalt\n")
-print("2. Mixed\n")
-print("3. Off Road\n")
-choice = str(input("Selected: "))
 
-if choice == "1":
-    print("Asphalt Selected")
-if choice == "2":
-    print("Mixed Selected")
-if choice == "3":
-    print("OffRoad Selected")
+print("Plesase Choose a Mode:")
+
+def Selection():
+    print("1. Asphalt\n")
+    print("2. Mixed\n")
+    print("3. Off Road\n")
+Selection()
+
+
+while True:
+    choice = str(input("Selected: "))
+
+    if  choice == "1":
+        print("Asphalt Selected")
+        break
+    if choice == "2":
+        print("Mixed Selected")
+        break
+    if choice == "3":
+        print("OffRoad Selected")
+        break
+    else:
+        print("\nPlease select a valid choice:\n")
+        Selection()
+
 
 class Forza(object):
     #default values for Racing parts
@@ -111,9 +125,10 @@ class Forza(object):
         self.BStiffnesFrontRV = (self.BStiffnesFrontMV - (self.BStiffnesFrontMV * self.OTuningVF))
         self.BStiffnesRearRV = (self.BStiffnesRearMV - (self.BStiffnesRearMV * self.OTuningVR))
 
-    def NotCool(self):
-        print ("Please select a valid choice")
-#Alias Forza class
+    #def NotCool(self):
+       # print ("Please select a valid choice")
+
+# Alias Forza class
 cls = Forza()
 
 #Run Common function anyway to count the Middle Values
@@ -121,14 +136,14 @@ cls = Forza()
     "1":    cls.Common,
     "2":    cls.Common,
     "3":    cls.Common
-}.get(choice, cls.NotCool)()
+}.get(choice)() # if you want to run 'NotCool" function: }.get(choice, cls.NotCool)()
 
 #Run Selected function to count the Recomended Valuea
 {
     "1":    cls.Asphalt,
     "2":    cls.Mixed,
     "3":    cls.OffRoad
-}.get(choice, cls.NotCool)()
+}.get(choice)() # if you want to run 'NotCool" function: }.get(choice, cls.NotCool)()
 
 print("\n-------------------------------------------------------------------\n")
 print("Anti-Roll Bars Front Middle Value: ", Fore.BLUE + Style.BRIGHT +
