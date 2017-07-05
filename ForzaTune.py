@@ -7,6 +7,7 @@ def Selection():
     print("1. Asphalt\n")
     print("2. Mixed\n")
     print("3. Off Road\n")
+    print("To Exit press 'e'\n")
 Selection()
 
 
@@ -22,6 +23,8 @@ while True:
     if choice == "3":
         print("OffRoad Selected")
         break
+    if choice == "e":
+        exit()
     else:
         print("\nPlease select a valid choice:\n")
         Selection()
@@ -135,7 +138,7 @@ cls = Forza()
 {
     "1":    cls.Common,
     "2":    cls.Common,
-    "3":    cls.Common
+    "3":    cls.Common,
 }.get(choice)() # if you want to run 'NotCool" function: }.get(choice, cls.NotCool)()
 
 #Run Selected function to count the Recomended Valuea
