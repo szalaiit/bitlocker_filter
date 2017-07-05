@@ -23,7 +23,7 @@ while True:
     if choice == "3":
         print("OffRoad Selected")
         break
-    if choice == "e":
+    if choice == "e" or "exit":
         exit()
     else:
         print("\nPlease select a valid choice:\n")
