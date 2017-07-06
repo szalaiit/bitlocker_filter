@@ -1,36 +1,86 @@
+"""Usage:
+        ForzaTune.py (-a, --asphalt | -r, -- rally | -o, --offroad ) [options]
+
+Options:
+    -w, --weight    :   Weight Distribution of the car
+    -m, --min       :   Minimum value of the springs
+    -x, --max       :   Maximum value of the springs
+    -h, --help      :   Show this help message and exit
+Example:
+    ForzaTune.py -a -w 55 -m 67.5 -x 345.2
+"""
+from docopt import docopt
+
 from colorama import Fore, Back, Style
 
+import sys
 
-print("Plesase Choose a Mode:")
+def CLI():
+    if __name__ == '__main__':
+        arguments = docopt(__doc__, version='ForzaTune 0.1.1')
+        print(arguments)
 
 def Selection():
+    print("Plesase Choose a Mode:\n")
     print("1. Asphalt\n")
     print("2. Mixed\n")
     print("3. Off Road\n")
     print("To Exit press 'e'\n")
-Selection()
 
+def Menu():
+    while True:
+        choice = str(input("Selected: "))
 
-while True:
-    choice = str(input("Selected: "))
+        if choice == "1":
+            print("Asphalt Selected")
+            break
+        if choice == "2":
+            print("Mixed Selected")
+            break
+        if choice == "3":
+            print("OffRoad Selected")
+            break
+        if choice == "e" or "exit":
+            exit()
+        else:
+            print("\nPlease select a valid choice:\n")
+            Selection()
+class Variables(object):
 
-    if  choice == "1":
-        print("Asphalt Selected")
-        break
-    if choice == "2":
-        print("Mixed Selected")
-        break
-    if choice == "3":
-        print("OffRoad Selected")
-        break
-    if choice == "e" or "exit":
-        exit()
-    else:
-        print("\nPlease select a valid choice:\n")
+    if len(sys.argv) > 1:
+        choice = "1"
+        wdf = float(50)
+        wdr = 100 - wdf
+        SpringsMin = float(50)
+        SpringsMax = float(50)
+        total = len(sys.argv)
+        cmdargs = sys.argv[1:]
+        for i in range(len(cmdargs)):
+            if cmdargs[i] == "-a":
+                choice = "1"
+            if cmdargs[i] == "-r":
+                choice = "2"
+            if cmdargs[i] == "-o":
+                choice = "3"
+            if cmdargs[i] == "-w":
+                wdf = float(cmdargs[i + 1])
+            if cmdargs[i] == "-m":
+                SpringsMin = float(cmdargs[i + 1])
+            if cmdargs[i] == "-x":
+                SpringsMax = float(cmdargs[i + 1])
+            if cmdargs[i] == "-h":
+                CLI()
+
+    if len(sys.argv) <= 1:
         Selection()
+        Menu()
+        wdf = float(input("Weight Distribution of your car: "))  # Front Weight Distripution of the car
+        wdr = 100 - wdf  # Rear Weight Disribution of the car
+        SpringsMin = float(input("Min Springs: "))  # Minimum Value of the Springs
+        SpringsMax = float(input("Max Springs: "))  # Maximum Value of the Springs
 
+class Forza(Variables):
 
-class Forza(object):
     #default values for Racing parts
     ARBarsMin = float(1) #Anti-Roll Bars Minimum value
     ARBarsMax = float(65) #Anti-Roll Bars Maximum value
@@ -47,18 +97,13 @@ class Forza(object):
     #Count middle values by ((Max - Min) * W + Min)
     def Common(self):
 
-        self.wdf = float(input("Weight Distribution of your car: ")) #Front Weight Distripution of the car
-        self.wdr = 100 - self.wdf #Rear Weight Disribution of the car
-        self.SpringsMin = float(input("Min Springs: ")) #Minimum Value of the Springs
-        self.SpringsMax = float(input("Max Springs: ")) #Maximum Value of the Springs
-
         #Counted Middle Value of the Anti-Roll Bars
-        self.ARBarsFrontMV = (((self.ARBarsMax - self.ARBarsMin) * (self.wdf / 100)) + self.ARBarsMin)
-        self.ARBarsRearMV = (((self.ARBarsMax - self.ARBarsMin) * (self.wdr / 100)) + self.ARBarsMin)
+        self.ARBarsFrontMV = (((self.ARBarsMax - self.ARBarsMin) * (Variables.wdf / 100)) + self.ARBarsMin)
+        self.ARBarsRearMV = (((self.ARBarsMax - self.ARBarsMin) * (Variables.wdr / 100)) + self.ARBarsMin)
 
         #Counted Middle Value of the Springs
-        self.SpringsFrontMV = (((self.SpringsMax - self.SpringsMin) * (self.wdf / 100)) + self.SpringsMin)
-        self.SpringsRearMV = (((self.SpringsMax - self.SpringsMin) * (self.wdr / 100)) + self.SpringsMin)
+        self.SpringsFrontMV = (((Variables.SpringsMax - Variables.SpringsMin) * (Variables.wdf / 100)) + Variables.SpringsMin)
+        self.SpringsRearMV = (((Variables.SpringsMax - Variables.SpringsMin) * (Variables.wdr / 100)) + Variables.SpringsMin)
 
 
     def Asphalt(self):
@@ -70,9 +115,9 @@ class Forza(object):
         self.SpringsRearRV = self.SpringsRearMV
 
         # Counted Middle Value of the Rebound Stiffness
-        self.RStiffnesFrontMV = (((self.RStiffnessMaxRace - self.RStiffnessMinRace) * (self.wdf / 100))
+        self.RStiffnesFrontMV = (((self.RStiffnessMaxRace - self.RStiffnessMinRace) * (Variables.wdf / 100))
                                  + self.RStiffnessMinRace)
-        self.RStiffnessRearMV = (((self.RStiffnessMaxRace - self.RStiffnessMinRace) * (self.wdr / 100))
+        self.RStiffnessRearMV = (((self.RStiffnessMaxRace - self.RStiffnessMinRace) * (Variables.wdr / 100))
                                  + self.RStiffnessMinRace)
 
         self.RStiffnessFrontRV = (self.RStiffnesFrontMV - (self.RStiffnesFrontMV * self.ATuningV))
@@ -93,9 +138,9 @@ class Forza(object):
         self.SpringsFrontRV = (self.SpringsFrontMV - (self.SpringsFrontMV * self.MTuningVF))
         self.SpringsRearRV = (self.SpringsRearMV - (self.SpringsRearMV * self.MTuningVR))
 
-        self.RStiffnesFrontMV = (((self.RStiffnessMaxRally - self.RStiffnessMinRally) * (self.wdf / 100))
+        self.RStiffnesFrontMV = (((self.RStiffnessMaxRally - self.RStiffnessMinRally) * (Variables.wdf / 100))
                                  + self.RStiffnessMinRally)
-        self.RStiffnessRearMV = (((self.RStiffnessMaxRally - self.RStiffnessMinRally) * (self.wdr / 100))
+        self.RStiffnessRearMV = (((self.RStiffnessMaxRally - self.RStiffnessMinRally) * (Variables.wdr / 100))
                                  + self.RStiffnessMinRally)
 
         # Counted Middle Value of the Bound Stiffness
@@ -108,15 +153,16 @@ class Forza(object):
         self.BStiffnesRearRV = (self.BStiffnesRearMV - (self.BStiffnesRearMV * self.MTuningVR))
 
     def OffRoad(self):
+        
         self.ARBarsFrontRV = (self.ARBarsFrontMV - (self.ARBarsFrontMV * self.OTuningVF))
         self.ARBarsRearRV = (self.ARBarsRearMV - (self.ARBarsRearMV * self.OTuningVR))
 
         self.SpringsFrontRV = (self.SpringsFrontMV - (self.SpringsFrontMV * self.OTuningVF))
         self.SpringsRearRV = (self.SpringsRearMV - (self.SpringsRearMV * self.OTuningVR))
 
-        self.RStiffnesFrontMV = (((self.RStiffnessMaxRally - self.RStiffnessMinRally) * (self.wdf / 100))
+        self.RStiffnesFrontMV = (((self.RStiffnessMaxRally - self.RStiffnessMinRally) * (Variables.wdf / 100))
                                  + self.RStiffnessMinRally)
-        self.RStiffnessRearMV = (((self.RStiffnessMaxRally - self.RStiffnessMinRally) * (self.wdr / 100))
+        self.RStiffnessRearMV = (((self.RStiffnessMaxRally - self.RStiffnessMinRally) * (Variables.wdr / 100))
                                  + self.RStiffnessMinRally)
 
         # Counted Middle Value of the Bound Stiffness
@@ -133,20 +179,20 @@ class Forza(object):
 
 # Alias Forza class
 cls = Forza()
-
+vari = Variables()
 #Run Common function anyway to count the Middle Values
 {
     "1":    cls.Common,
     "2":    cls.Common,
     "3":    cls.Common,
-}.get(choice)() # if you want to run 'NotCool" function: }.get(choice, cls.NotCool)()
+}.get(vari.choice)() # if you want to run 'NotCool" function: }.get(choice, cls.NotCool)()
 
 #Run Selected function to count the Recomended Valuea
 {
     "1":    cls.Asphalt,
     "2":    cls.Mixed,
     "3":    cls.OffRoad
-}.get(choice)() # if you want to run 'NotCool" function: }.get(choice, cls.NotCool)()
+}.get(vari.choice)() # if you want to run 'NotCool" function: }.get(choice, cls.NotCool)()
 
 print("\n-------------------------------------------------------------------\n")
 print("Anti-Roll Bars Front Middle Value: ", Fore.BLUE + Style.BRIGHT +
