@@ -15,7 +15,6 @@ from colorama import Fore, Back, Style
 
 import sys
 
-
 def CLI():
     if __name__ == '__main__':
         arguments = docopt(__doc__, version='ForzaTune 0.1.2')
@@ -28,23 +27,10 @@ def Selection():
     print("3. Off Road\n")
     print("To Exit press 'e'\n")
 
-
-def UserInput():
-    wdf = float(input("Weight Distribution of your car: "))  # Front Weight Distripution of the car
-    wdr = 100 - wdf  # Rear Weight Disribution of the car
-    SpringsMin = float(input("Min Springs: "))  # Minimum Value of the Springs
-    SpringsMax = float(input("Max Springs: "))  # Maximum Value of the Springs
-
 class Variables(object):
 
 
         if len(sys.argv) > 1:
-            choice = 0
-            wdf = float(50)
-            wdr = float(50)
-            SpringsMin = float(50)
-            SpringsMax = float(50)
-            total = len(sys.argv)
             cmdargs = sys.argv[1:]
             for i in range(len(cmdargs)):
                 if cmdargs[i] == "-a":
