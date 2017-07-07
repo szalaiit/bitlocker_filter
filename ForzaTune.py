@@ -31,6 +31,7 @@ def Menu():
     while True:
         choice = str(input("Selected: "))
 
+
         if choice == "1":
             print("Asphalt Selected")
             break
@@ -40,11 +41,13 @@ def Menu():
         if choice == "3":
             print("OffRoad Selected")
             break
-        if choice == "e" or "exit":
+        if choice in ["e", "exit"]:
+            print("exit")
             exit()
         else:
             print("\nPlease select a valid choice:\n")
             Selection()
+
 class Variables(object):
 
     if len(sys.argv) > 1:
@@ -153,7 +156,7 @@ class Forza(Variables):
         self.BStiffnesRearRV = (self.BStiffnesRearMV - (self.BStiffnesRearMV * self.MTuningVR))
 
     def OffRoad(self):
-        
+
         self.ARBarsFrontRV = (self.ARBarsFrontMV - (self.ARBarsFrontMV * self.OTuningVF))
         self.ARBarsRearRV = (self.ARBarsRearMV - (self.ARBarsRearMV * self.OTuningVR))
 
