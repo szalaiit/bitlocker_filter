@@ -15,6 +15,7 @@ from colorama import Fore, Back, Style
 
 import sys
 
+
 def CLI():
     if __name__ == '__main__':
         arguments = docopt(__doc__, version='ForzaTune 0.1.1')
@@ -27,10 +28,13 @@ def Selection():
     print("3. Off Road\n")
     print("To Exit press 'e'\n")
 
-def Menu():
-    while True:
-        choice = str(input("Selected: "))
 
+def Menu(choice):
+
+    while True:
+
+
+        choice = str(input("Selected: "))
 
         if choice == "1":
             print("Asphalt Selected")
@@ -47,13 +51,13 @@ def Menu():
         else:
             print("\nPlease select a valid choice:\n")
             Selection()
+        return choice
 
-class Variables(object):
 
-    if len(sys.argv) > 1:
-        choice = "1"
+def Args():
+        choice = 0
         wdf = float(50)
-        wdr = 100 - wdf
+        wdr = float(50)
         SpringsMin = float(50)
         SpringsMax = float(50)
         total = len(sys.argv)
@@ -67,20 +71,78 @@ class Variables(object):
                 choice = "3"
             if cmdargs[i] == "-w":
                 wdf = float(cmdargs[i + 1])
+                wdr = 100 - wdf
             if cmdargs[i] == "-m":
                 SpringsMin = float(cmdargs[i + 1])
             if cmdargs[i] == "-x":
                 SpringsMax = float(cmdargs[i + 1])
             if cmdargs[i] == "-h":
                 CLI()
+        return choice
 
-    if len(sys.argv) <= 1:
-        Selection()
-        Menu()
-        wdf = float(input("Weight Distribution of your car: "))  # Front Weight Distripution of the car
-        wdr = 100 - wdf  # Rear Weight Disribution of the car
-        SpringsMin = float(input("Min Springs: "))  # Minimum Value of the Springs
-        SpringsMax = float(input("Max Springs: "))  # Maximum Value of the Springs
+def UserInput():
+    wdf = float(input("Weight Distribution of your car: "))  # Front Weight Distripution of the car
+    wdr = 100 - wdf  # Rear Weight Disribution of the car
+    SpringsMin = float(input("Min Springs: "))  # Minimum Value of the Springs
+    SpringsMax = float(input("Max Springs: "))  # Maximum Value of the Springs
+
+class Variables(object):
+
+
+        if len(sys.argv) > 1:
+            choice = 0
+            wdf = float(50)
+            wdr = float(50)
+            SpringsMin = float(50)
+            SpringsMax = float(50)
+            total = len(sys.argv)
+            cmdargs = sys.argv[1:]
+            for i in range(len(cmdargs)):
+                if cmdargs[i] == "-a":
+                    choice = "1"
+                if cmdargs[i] == "-r":
+                    choice = "2"
+                if cmdargs[i] == "-o":
+                    choice = "3"
+                if cmdargs[i] == "-w":
+                    wdf = float(cmdargs[i + 1])
+                    wdr = 100 - wdf
+                if cmdargs[i] == "-m":
+                    SpringsMin = float(cmdargs[i + 1])
+                if cmdargs[i] == "-x":
+                    SpringsMax = float(cmdargs[i + 1])
+                if cmdargs[i] == "-h":
+                    CLI()
+
+        if len(sys.argv) <= 1:
+            Selection()
+
+            while True:
+
+                choice = str(input("Selected: "))
+
+                if choice == "1":
+                    print("Asphalt Selected")
+                    break
+                if choice == "2":
+                    print("Mixed Selected")
+                    break
+                if choice == "3":
+                    print("OffRoad Selected")
+                    break
+                if choice in ["e", "exit"]:
+                    print("exit")
+                    exit()
+                else:
+                    print("\nPlease select a valid choice:\n")
+                    Selection()
+
+            wdf = float(input("Weight Distribution of your car: "))  # Front Weight Distripution of the car
+            wdr = 100 - wdf  # Rear Weight Disribution of the car
+            SpringsMin = float(input("Min Springs: "))  # Minimum Value of the Springs
+            SpringsMax = float(input("Max Springs: "))  # Maximum Value of the Springs
+
+
 
 class Forza(Variables):
 
@@ -188,14 +250,16 @@ vari = Variables()
     "1":    cls.Common,
     "2":    cls.Common,
     "3":    cls.Common,
-}.get(vari.choice)() # if you want to run 'NotCool" function: }.get(choice, cls.NotCool)()
+}.get(vari.choice)()
+# if you want to run 'NotCool" function: }.get(choice, cls.NotCool)()
 
 #Run Selected function to count the Recomended Valuea
 {
     "1":    cls.Asphalt,
     "2":    cls.Mixed,
     "3":    cls.OffRoad
-}.get(vari.choice)() # if you want to run 'NotCool" function: }.get(choice, cls.NotCool)()
+}.get(vari.choice)()
+# if you want to run 'NotCool" function: }.get(choice, cls.NotCool)()
 
 print("\n-------------------------------------------------------------------\n")
 print("Anti-Roll Bars Front Middle Value: ", Fore.BLUE + Style.BRIGHT +
