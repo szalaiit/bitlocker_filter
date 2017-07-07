@@ -18,7 +18,7 @@ import sys
 
 def CLI():
     if __name__ == '__main__':
-        arguments = docopt(__doc__, version='ForzaTune 0.1.1')
+        arguments = docopt(__doc__, version='ForzaTune 0.1.2')
         print(arguments)
 
 def Selection():
@@ -28,57 +28,6 @@ def Selection():
     print("3. Off Road\n")
     print("To Exit press 'e'\n")
 
-
-def Menu(choice):
-
-    while True:
-
-
-        choice = str(input("Selected: "))
-
-        if choice == "1":
-            print("Asphalt Selected")
-            break
-        if choice == "2":
-            print("Mixed Selected")
-            break
-        if choice == "3":
-            print("OffRoad Selected")
-            break
-        if choice in ["e", "exit"]:
-            print("exit")
-            exit()
-        else:
-            print("\nPlease select a valid choice:\n")
-            Selection()
-        return choice
-
-
-def Args():
-        choice = 0
-        wdf = float(50)
-        wdr = float(50)
-        SpringsMin = float(50)
-        SpringsMax = float(50)
-        total = len(sys.argv)
-        cmdargs = sys.argv[1:]
-        for i in range(len(cmdargs)):
-            if cmdargs[i] == "-a":
-                choice = "1"
-            if cmdargs[i] == "-r":
-                choice = "2"
-            if cmdargs[i] == "-o":
-                choice = "3"
-            if cmdargs[i] == "-w":
-                wdf = float(cmdargs[i + 1])
-                wdr = 100 - wdf
-            if cmdargs[i] == "-m":
-                SpringsMin = float(cmdargs[i + 1])
-            if cmdargs[i] == "-x":
-                SpringsMax = float(cmdargs[i + 1])
-            if cmdargs[i] == "-h":
-                CLI()
-        return choice
 
 def UserInput():
     wdf = float(input("Weight Distribution of your car: "))  # Front Weight Distripution of the car
