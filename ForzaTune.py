@@ -72,11 +72,31 @@ class Variables(object):
                     print("\nPlease select a valid choice:\n")
                     Selection()
 
-            wdf = float(input("Weight Distribution of your car: "))  # Front Weight Distripution of the car
-            wdr = 100 - wdf  # Rear Weight Disribution of the car
-            SpringsMin = float(input("Min Springs: "))  # Minimum Value of the Springs
-            SpringsMax = float(input("Max Springs: "))  # Maximum Value of the Springs
+            while True:
+                try:
+                    wdf = input("Weight Distribution of your car: ")  # Front Weight Distripution of the car
+                    wdf = int(wdf)
+                    break
+                except ValueError:
+                    print("Not a valid number! Please try again ...")
 
+            wdr = 100 - wdf  # Rear Weight Disribution of the car
+
+            while True:
+                try:
+                    SpringsMin = input("Min Springs: ")  # Front Weight Distripution of the car
+                    SpringsMin = int(SpringsMin)
+                    break
+                except ValueError:
+                    print("Not a valid number! Please try again ...")
+
+            while True:
+                try:
+                    SpringsMax = input("Max Springs: ")  # Front Weight Distripution of the car
+                    SpringsMax = int(SpringsMax)
+                    break
+                except ValueError:
+                    print("Not a valid number! Please try again ...")
 
 
 class Forza(Variables):
