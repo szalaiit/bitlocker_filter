@@ -9,11 +9,11 @@ As HokiHoshi explains in this video bellow
 
 https://www.youtube.com/watch?v=qKhrvG8v6TY&t=522s
 
- It could be a good idea to tune your car based on the following formula:
+ It could be a good idea to tune your car based on the following formula
 
 (Max – Min) * W%) – Min = Setting
 
-To get the middle values your settings. But in general, I like my cars to set up a bit softer than the middle value.
+to get the middle values your settings. But in general, I like my cars to set up a bit softer than the middle value.
 
 Depends on what surface do I want to use my car, I like to change the setting by the same ratio on every component.
 
