@@ -33,11 +33,11 @@ class Variables(object):
         if len(sys.argv) > 1:
             cmdargs = sys.argv[1:]
             for i in range(len(cmdargs)):
-                if cmdargs[i] == "-a":
+                if cmdargs[i] in ["-a", "--asphalt"]:
                     choice = "1"
-                if cmdargs[i] == "-r":
+                if cmdargs[i] in ["-r", "--rally"]:
                     choice = "2"
-                if cmdargs[i] == "-o":
+                if cmdargs[i] in ["-o", "--offroad"]:
                     choice = "3"
                 if cmdargs[i] == "-w":
                     wdf = int(cmdargs[i + 1])
