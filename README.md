@@ -81,4 +81,4 @@ Example:
 
 ```$ python3 ForzaTune.py -r -w 54 -m 65.7 -x 289.6 ```
 
-Will have the same output. Please ```run $ python3 ForzaTune.py -h``` for help. 
+Will have the same output. Please run ```$ python3 ForzaTune.py -h``` for help. 
