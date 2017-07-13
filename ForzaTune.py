@@ -17,13 +17,13 @@ import sys
 
 def CLI():
     if __name__ == '__main__':
-        arguments = docopt(__doc__, version='ForzaTune 0.1.2')
+        arguments = docopt(__doc__, version='ForzaTune 0.1.3')
         print(arguments)
 
 def Selection():
     print("Plesase Choose a Mode:\n")
     print("1. Asphalt\n")
-    print("2. Mixed\n")
+    print("2. Mixed/Rally\n")
     print("3. Off Road\n")
     print("To Exit press 'e'\n")
 
@@ -40,7 +40,7 @@ class Variables(object):
                 if cmdargs[i] == "-o":
                     choice = "3"
                 if cmdargs[i] == "-w":
-                    wdf = float(cmdargs[i + 1])
+                    wdf = int(cmdargs[i + 1])
                     wdr = 100 - wdf
                 if cmdargs[i] == "-m":
                     SpringsMin = float(cmdargs[i + 1])
@@ -54,22 +54,22 @@ class Variables(object):
 
             while True:
 
-                choice = str(input("Selected: "))
+                choice = str(input(Fore.RED + Style.BRIGHT + "Selected: " + Style.RESET_ALL))
 
                 if choice == "1":
-                    print("Asphalt Selected")
+                    print(Fore.BLUE + Style.BRIGHT + "Asphalt Selected" + Style.RESET_ALL)
                     break
                 if choice == "2":
-                    print("Mixed Selected")
+                    print(Fore.BLUE + Style.BRIGHT + "Mixed/Rally Selected" + Style.RESET_ALL)
                     break
                 if choice == "3":
-                    print("OffRoad Selected")
+                    print(Fore.BLUE + Style.BRIGHT + "OffRoad Selected" + Style.RESET_ALL)
                     break
                 if choice in ["e", "exit"]:
-                    print("exit")
+                    print(Fore.RED + Style.BRIGHT + "exit" + Style.RESET_ALL)
                     exit()
                 else:
-                    print("\nPlease select a valid choice:\n")
+                    print(Fore.RED + Style.BRIGHT +"\nPlease select a valid choice!\n" + Style.RESET_ALL)
                     Selection()
 
             while True:
@@ -85,7 +85,7 @@ class Variables(object):
             while True:
                 try:
                     SpringsMin = input("Min Springs: ")  # Front Weight Distripution of the car
-                    SpringsMin = int(SpringsMin)
+                    SpringsMin = float(SpringsMin)
                     break
                 except ValueError:
                     print("Not a valid number! Please try again ...")
@@ -93,7 +93,7 @@ class Variables(object):
             while True:
                 try:
                     SpringsMax = input("Max Springs: ")  # Front Weight Distripution of the car
-                    SpringsMax = int(SpringsMax)
+                    SpringsMax = float(SpringsMax)
                     break
                 except ValueError:
                     print("Not a valid number! Please try again ...")
