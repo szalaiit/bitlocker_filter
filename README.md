@@ -18,7 +18,7 @@ I pre-defined three modes: Asphalt, Mixed and Off Road. Depends on which mode I 
 This script requires python3, and docopt and colorama libraries. There is a plan to create an external library independent version.
 
 Example:
-
+```
 $ python3 ForzaTune.py
 Plesase Choose a Mode:
 
@@ -73,12 +73,12 @@ Bump Stiffness Front Recommended Value:  2.32
 Bump Stiffness Rear Middle Value:  2.06
 
 Bump Stiffness Rear Recomended Value:  2.01
-
+```
 
 It also takes command line argument.
 
 Example:
 
-$ python3 ForzaTune.py -r -w 54 -m 65.7 -x 289.6
+```$ python3 ForzaTune.py -r -w 54 -m 65.7 -x 289.6 ```
 
-Will have the same output. Please '''run $ python3 ForzaTune.py -h''' for help. 
+Will have the same output. Please ```run $ python3 ForzaTune.py -h``` for help. 
