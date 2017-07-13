@@ -75,7 +75,7 @@ Bump Stiffness Rear Middle Value:  2.06
 Bump Stiffness Rear Recomended Value:  2.01
 ```
 
-It also takes command line argument.
+It also takes command line arguments.
 
 Example:
 
