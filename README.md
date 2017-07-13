@@ -1,5 +1,5 @@
 # ForzaTune
-Python tool to help tune your car in [Forza Horizon 3] (https://forzamotorsport.net/en-us/games/fh3)
+Python tool to help tune your car in [Forza Horizon 3](https://forzamotorsport.net/en-us/games/fh3)
 
 
 
