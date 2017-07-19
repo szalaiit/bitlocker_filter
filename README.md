@@ -6,3 +6,5 @@ I've found the PowerShell script [here](https://ndswanson.wordpress.com/2014/10/
 The PS script exports the keys into a .csv file.
 
 My python cript reads/filters the bitlocker.csv file and writes into a new output.csv file.
+
+## Work in progress
