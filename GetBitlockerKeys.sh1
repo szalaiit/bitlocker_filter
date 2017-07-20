@@ -8,4 +8,4 @@ $computer = Get-ADComputer -Filter {Name -eq $hostname}
 $BitLockerObjects = Get-ADObject -Filter {objectclass -eq 'msFVE-RecoveryInformation'} -SearchBase $computer.DistinguishedName -Properties 'msFVE-RecoveryPassword'
 
 # Output the results!
-$BitLockerObjects | Export-Csv 'bitlocker.csv'
+$BitLockerObjects | Export-Csv $hostname'+.csv'
