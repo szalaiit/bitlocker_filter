@@ -1,4 +1,4 @@
-#Ask for hostname of the computer
+# Ask for hostname of the computer
 $hostname = Read-Host -Prompt ‘Enter hostname’
 
 # Get Computer Object
@@ -7,5 +7,15 @@ $computer = Get-ADComputer -Filter {Name -eq $hostname}
 # Get all BitLocker Recovery Keys for that Computer. Note the 'SearchBase' parameter
 $BitLockerObjects = Get-ADObject -Filter {objectclass -eq 'msFVE-RecoveryInformation'} -SearchBase $computer.DistinguishedName -Properties 'msFVE-RecoveryPassword'
 
-# Output the results!
-$BitLockerObjects | Export-Csv $hostname'+.csv'
+# Filter the only the Date and the Recovery key then short by the Date
+$Filtered = $BitLockerObjects | Select-Object @{Name = "Date"; Expression = {
+    ForEach-Object -Process { ($_ -split { $_ -eq "=" -or $_ -ceq "T" })[1] } } },
+    @{ Name = "Recovery Key"; Expression = { $_.'msFVE-RecoveryPassword' } } |
+    Sort-Object -Property Date
+    
+# Print out the Filtered list 
+$Filtered
+
+# For inforation security reasons I don't recomend to do the following.
+# Uncomment the next line if you want to export the result in .csv format into your working directory.
+#$Filtered | Export-Csv $hostname'+.csv'
