@@ -7,11 +7,11 @@ $Computer = Get-ADComputer -Filter {Name -eq $HostName}
 # Get all BitLocker Recovery Keys for that Computer. Note the 'SearchBase' parameter
 $BitLockerObjects = Get-ADObject -Filter {objectclass -eq 'msFVE-RecoveryInformation'} -SearchBase $Computer.DistinguishedName -Properties 'msFVE-RecoveryPassword'
 
-# Filter the only the Date and the Recovery key then short by the Date
+# Filter the only the Date and the Recovery key then short by the Date start with the latest one
 $Filtered = $BitLockerObjects | Select-Object @{Name = "Date"; Expression = {
     ForEach-Object -Process { ($_ -split { $_ -eq "=" -or $_ -ceq "T" })[1] } } },
     @{ Name = "Recovery Key"; Expression = { $_."msFVE-RecoveryPassword" } } |
-    Sort-Object -Property Date
+    Sort-Object -Property Date -descending
     
 # Print out the Filtered list 
 $Filtered
